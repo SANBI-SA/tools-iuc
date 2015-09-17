@@ -47,7 +47,7 @@
   #end for
   </command>
   <requirements>
-    <requirement type="package" version="0.32">trimmomatic</requirement>
+    <requirement type="package" version="0.33">trimmomatic</requirement>
   </requirements>
   <inputs>
     <conditional name="paired_end">
