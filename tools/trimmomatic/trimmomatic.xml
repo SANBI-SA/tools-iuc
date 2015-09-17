@@ -1,11 +1,11 @@
-<tool id="trimmomatic" name="Trimmomatic" version="0.32.2">
+<tool id="trimmomatic" name="Trimmomatic" version="0.33">
   <description>flexible read trimming tool for Illumina NGS data</description>
   <requirements>
-    <requirement type="package" version="0.32">trimmomatic</requirement>
+    <requirement type="package" version="0.33">trimmomatic</requirement>
   </requirements>
   <command interpreter="bash">trimmomatic.sh
   -mx8G
-  -jar \$TRIMMOMATIC_DIR/trimmomatic-0.32.jar
+  -jar \$TRIMMOMATIC_DIR/trimmomatic-0.33.jar
   #if $paired_end.is_paired_end
     PE -threads \${GALAXY_SLOTS:-6} -phred33 $fastq_r1_in $paired_end.fastq_r2_in $fastq_out_r1_paired $fastq_out_r1_unpaired $fastq_out_r2_paired $fastq_out_r2_unpaired 
   #else
