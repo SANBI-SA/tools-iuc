@@ -1,5 +1,8 @@
 <tool id="trimmomatic" name="Trimmomatic" version="0.32.2">
   <description>flexible read trimming tool for Illumina NGS data</description>
+  <requirements>
+    <requirement type="package" version="0.32">trimmomatic</requirement>
+  </requirements>
   <command interpreter="bash">trimmomatic.sh
   -mx8G
   -jar \$TRIMMOMATIC_DIR/trimmomatic-0.32.jar
@@ -36,9 +39,6 @@
     #end if
   #end for
   </command>
-  <requirements>
-    <requirement type="package" version="0.32">trimmomatic</requirement>
-  </requirements>
   <inputs>
     <conditional name="paired_end">
     <param name="is_paired_end" type="boolean" label="Paired end data?" truevalue="yes" falsevalue="no" checked="on" />
