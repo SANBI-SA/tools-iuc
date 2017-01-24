@@ -11,7 +11,7 @@
     gatk2_wrapper.py
    --stdout "${output_log}"
     #for $var_count, $variant in enumerate( $reference_source.input_variants ):
-        -d "--eval:input_${var_count},%(file_type)s" "${variant}" "${variant.ext}" "input_variants_${var_count}"
+       -d "--eval:input_${var_count},%(file_type)s" "${variant}" "${variant.ext}" "input_variants_${var_count}"
     #end for
     -p '
     @JAR_PATH@
@@ -109,7 +109,7 @@
         </param>
       </when>
       <when value="history"> <!-- FIX ME!!!! -->
-        <expand macro="input_variants" help="-eval,--eval &amp;lt;eval&amp;gt;" />
+        <expand macro="input_variants" help="-eval,--eval &amp;lt;eval&amp;gt;"/>
         <param name="ref_file" type="data" format="fasta" label="Using reference file" help="-R,--reference_sequence &amp;lt;reference_sequence&amp;gt;" />
       </when>
     </conditional>

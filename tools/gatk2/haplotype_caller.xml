@@ -123,7 +123,7 @@
         </param>
       </when>
       <when value="history">
-        <expand macro="input_bams_history" />
+        <param name="input_bams" type="data" format="bam" label="BAM file" multiple="True" min="1" help="-I,--input_file &amp;lt;input_file&amp;gt;" />
         <param name="ref_file" type="data" format="fasta" label="Using reference file" help="-R,--reference_sequence &amp;lt;reference_sequence&amp;gt;" />
       </when>
     </conditional>

@@ -1,4 +1,4 @@
-<tool id="gatk2_variant_select" name="Select Variants" version="@VERSION@.2">
+<tool id="gatk2_variant_select" name="Select Variants" version="@VERSION@.1">
   <description>from VCF files</description>
   <macros>
     <import>gatk2_macros.xml</import>
@@ -56,6 +56,10 @@
 
           #for $sf in $analysis_param_type.sample_file:
               --sample_file "${sf}"
+          #end for
+
+          #for $sample_file in $analysis_param_type.sample_file_repeat:
+              --sample_file "${ample_file.sample_file}"
           #end for
 
           #if $analysis_param_type.input_keep_ids:

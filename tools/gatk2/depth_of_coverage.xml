@@ -1,4 +1,4 @@
-<tool id="gatk2_depth_of_coverage" name="Depth of Coverage" version="@VERSION@.1">
+<tool id="gatk2_depth_of_coverage" name="Depth of Coverage" version="@VERSION@.0">
   <description>on BAM files</description>
   <macros>
     <import>gatk2_macros.xml</import>
@@ -15,6 +15,8 @@
     \$GATK2_SITE_OPTIONS
 
     @THREADS@
+
+    @INTERVAL_STATS@
 
     #if $reference_source.reference_source_selector != "history":
         -R "${reference_source.ref_file.fields.path}"
@@ -133,8 +135,7 @@
         </param>
       </when>
       <when value="history"> <!-- FIX ME!!!! -->
-
-        <expand macro="input_bams_history" />
+        <param name="input_bams" type="data" format="bam" label="BAM file" multiple="True" min="1" help="-I,--input_file &amp;lt;input_file&amp;gt;" />
         <param name="ref_file" type="data" format="fasta" label="Using reference file" help="-R,--reference_sequence &amp;lt;reference_sequence&amp;gt;" />
       </when>
     </conditional>
