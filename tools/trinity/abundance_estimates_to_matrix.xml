@@ -1,17 +1,17 @@
-<tool id="trinity_abundance_estimates_to_matrix" name="Build expression matrix" version="@WRAPPER_VERSION@.1">
+<tool id="trinity_abundance_estimates_to_matrix" name="Build expression matrix" version="@WRAPPER_VERSION@.2">
     <description>for a de novo assembly of RNA-Seq data by Trinity</description>
     <macros>
         <import>macros.xml</import>
     </macros>
     <expand macro="requirements">
-        <requirement type="package" version="3.14.0">bioconductor-edger</requirement>
-        <requirement type="package" version="0.7.2">salmon</requirement>
+        <requirement type="package" version="3.20.1">bioconductor-edger</requirement>
+        <requirement type="package" version="0.9.1">salmon</requirement>
+        <requirement type="package" version="0.43.1">kallisto</requirement>
     </expand>
-    <expand macro="stdio"/>
-    <command><![CDATA[
+    <command detect_errors="aggressive"><![CDATA[
         #import re
         #for $entry in $samples:
-            ln -s '${entry}' '${re.sub('[^\w\-_]', '_', entry.element_identifier)}' &&
+            ln -f -s '${entry}' '${re.sub('[^\w\-_]', '_', entry.element_identifier)}' &&
         #end for
 
         abundance_estimates_to_matrix.pl
@@ -30,6 +30,7 @@
             <option value="RSEM">RSEM</option>
             <option value="eXpress">eXpress</option>
             <option value="salmon">Salmon</option>
+            <option value="kallisto">Kallisto</option>
         </param>
 
         <section name="additional_params" title="Additional Options" expanded="False">
@@ -170,6 +171,29 @@
                 </assert_contents>
             </output>
             <output name="TPM_no_norm">
+                <assert_contents>
+                    <has_line_matching expression="TRINITY_DN3_c0_g1&#009;.*" />
+                    <has_n_columns n="3" />
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+            <param name="samples" ftype="tabular" value="count/kallisto/abundance.tsv.genes,count/kallisto/abundance_B.tsv.genes"/>
+            <param name="est_method" value="kallisto"/>
+            <param name="cross_sample_norm" value="TMM"/>
+            <output name="trans_counts">
+                <assert_contents>
+                    <has_line_matching expression="TRINITY_DN3_c0_g1&#009;.*" />
+                    <has_n_columns n="3" />
+                </assert_contents>
+            </output>
+            <output name="TPM_no_norm">
+                <assert_contents>
+                    <has_line_matching expression="TRINITY_DN3_c0_g1&#009;.*" />
+                    <has_n_columns n="3" />
+                </assert_contents>
+            </output>
+            <output name="norm">
                 <assert_contents>
                     <has_line_matching expression="TRINITY_DN3_c0_g1&#009;.*" />
                     <has_n_columns n="3" />
